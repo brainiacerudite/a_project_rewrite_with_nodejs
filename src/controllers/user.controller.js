@@ -10,7 +10,7 @@ const update = catchAsync(async (req, res) => {
 });
 
 const destory = catchAsync(async (req, res) => {
-  return res.status(httpStatus.OK).send();
+  return res.status(httpStatus.NO_CONTENT).send();
 });
 
 module.exports = {
