@@ -1,21 +1,17 @@
 const httpStatus = require("http-status");
+const catchAsync = require("../utils/catchAsync");
 
-function index(req, res) {
-  return res.statusCode(httpStatus.OK);
-}
+const index = catchAsync(async (req, res) => {
+  res.status(httpStatus.OK).send("user details");
+});
 
-function update(req, res) {
-  // validation
+const update = catchAsync(async (req, res) => {
+  res.status(httpStatus.OK).send();
+});
 
-  // save edited data
-
-  return res.statusCode(httpStatus.OK);
-}
-
-function destory(req, res) {
-  // delete user
-  return res.statusCode(httpStatus.OK);
-}
+const destory = catchAsync(async (req, res) => {
+  return res.status(httpStatus.OK).send();
+});
 
 module.exports = {
   index,

@@ -1,51 +1,67 @@
 const httpStatus = require("http-status");
+const catchAync = require("../utils/catchAsync");
 
-function login(req, res) {
+const login = catchAync(async (req, res) => {
   // validation
 
   // autheticate
 
-  return res.statusCode(httpStatus.NO_CONTENT);
-}
+  res.status(httpStatus.NO_CONTENT);
+});
 
-function register(req, res) {
+const register = catchAync(async (req, res) => {
   // validation
 
   // save user
 
   // authenticate
 
-  return res.statusCode(httpStatus.NO_CONTENT);
-}
+  res.status(httpStatus.NO_CONTENT);
+});
 
-function verifyEmail(req, res) {
+const logout = catchAync(async (req, res) => {
+  res.status(httpStatus.OK);
+});
+
+const refreshTokens = catchAync(async (req, res) => {
+  res.send("token");
+});
+
+const forgetPassword = catchAync(async (req, res) => {
   // validation
 
   // logic
 
-  return res.statusCode(httpStatus.NO_CONTENT);
-}
+  res.status(httpStatus.NO_CONTENT);
+});
 
-function forgetPassword(req, res) {
+const resetPassword = catchAync(async (req, res) => {
   // validation
 
   // logic
 
-  return res.statusCode(httpStatus.NO_CONTENT);
-}
+  res.status(httpStatus.NO_CONTENT);
+});
 
-function resetPassword(req, res) {
+const sendVerificationEmail = catchAync(async (req, res) => {
+  res.status(httpStatus.NO_CONTENT).send();
+});
+
+const verifyEmail = catchAync(async (req, res) => {
   // validation
 
   // logic
 
-  return res.statusCode(httpStatus.NO_CONTENT);
-}
+  res.status(httpStatus.NO_CONTENT);
+});
 
 module.exports = {
   login,
   register,
-  verifyEmail,
+  logout,
+  refreshTokens,
   forgetPassword,
   resetPassword,
+  sendVerificationEmail,
+  verifyEmail,
 };
