@@ -9,12 +9,12 @@ const update = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send();
 });
 
-const destory = catchAsync(async (req, res) => {
-  return res.status(httpStatus.NO_CONTENT).send();
+const passwordUpdate = catchAsync(async (req, res) => {
+  res.status(httpStatus.OK).send();
 });
 
 module.exports = {
   index,
   update,
-  destory,
+  passwordUpdate,
 };
