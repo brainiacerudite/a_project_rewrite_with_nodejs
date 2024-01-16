@@ -13,8 +13,7 @@ const config = {
       (process.env.NODE_ENV === "test" ? "-test" : ""),
     options: {
       useCreateIndex: true,
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
+      // useFindAndModify: false,
     },
   },
   jwt: {
