@@ -5,7 +5,6 @@ dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 const config = {
   env: process.env.NODE_ENV, // production|development|test
-  debug: process.env.DEBUG_MODE || false,
   port: process.env.PORT || 3000,
   mongoose: {
     url:
