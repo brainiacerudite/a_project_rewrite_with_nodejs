@@ -4,10 +4,11 @@ const apiRoute = require("./api.route");
 
 const router = express.Router();
 
-router.use("/", function (req, res) {
-  res.send("Hello Again");
-});
-
 router.use("/", authRoute);
+router.use("/api/", apiRoute);
+
+// router.use("/", function (req, res) {
+//   res.send("Hello Again");
+// });
 
 module.exports = router;

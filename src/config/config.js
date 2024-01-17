@@ -11,10 +11,7 @@ const config = {
     url:
       process.env.MONGODB_URL +
       (process.env.NODE_ENV === "test" ? "-test" : ""),
-    options: {
-      useCreateIndex: true,
-      // useFindAndModify: false,
-    },
+    options: {},
   },
   jwt: {
     secret: process.env.JWT_SECRET,

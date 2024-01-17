@@ -19,5 +19,5 @@ const password = (value, helpers) => {
 
 module.exports = {
   objectId,
-  password,
+  customPassword: password,
 };

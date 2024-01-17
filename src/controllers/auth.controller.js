@@ -27,7 +27,7 @@ const refreshTokens = catchAync(async (req, res) => {
   res.send("token");
 });
 
-const forgetPassword = catchAync(async (req, res) => {
+const forgotPassword = catchAync(async (req, res) => {
   // validation
 
   // logic
@@ -60,7 +60,7 @@ module.exports = {
   register,
   logout,
   refreshTokens,
-  forgetPassword,
+  forgotPassword,
   resetPassword,
   sendVerificationEmail,
   verifyEmail,

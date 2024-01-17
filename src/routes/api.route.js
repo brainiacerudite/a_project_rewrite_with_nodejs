@@ -1,4 +1,5 @@
 const express = require("express");
+const auth = require("../middlewares/auth");
 const userController = require("../controllers/user.controller");
 const betController = require("../controllers/bet.controller");
 const userBetController = require("../controllers/userbet.controller");
@@ -12,25 +13,25 @@ const pageController = require("../controllers/page.controller");
 
 const router = express.Router();
 
-router.get("api/user", userController.index);
-router.post("api/profile/update", userController.update);
-router.post("api/profile/password", userController.passwordUpdate);
+router.get("user", auth(), userController.index);
+router.post("profile/update", auth(), userController.update);
+router.post("profile/password", auth(), userController.passwordUpdate);
 
-router.get("api/bets", betController.index);
-router.post("api/bets/stake", betController.store);
+router.get("bets", auth(), betController.index);
+router.post("bets/stake", auth(), betController.store);
 
-router.get("api/my-bets", userBetController);
+router.get("my-bets", auth(), userBetController);
 
-router.get("api/payment-methods", paymentMethodController);
+router.get("payment-methods", auth(), paymentMethodController);
 
-router.get("api/transactions", transactionController);
-router.post("api/deposit", depositController);
-router.post("api/withdraw", withdrawalController);
+router.get("transactions", auth(), transactionController);
+router.post("deposit", auth(), depositController);
+router.post("withdraw", auth(), withdrawalController);
 
-router.post("api/support", supportController);
+router.post("support", auth(), supportController);
 
 // Not Auth routes in Api's routes
-router.get("api/faqs", faqController);
-router.get("api/pages/:slug", pageController);
+router.get("faqs", faqController);
+router.get("pages/:slug", pageController);
 
 module.exports = router;
