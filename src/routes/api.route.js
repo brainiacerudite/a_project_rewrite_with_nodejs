@@ -13,25 +13,25 @@ const pageController = require("../controllers/page.controller");
 
 const router = express.Router();
 
-router.get("user", auth(), userController.index);
-router.post("profile/update", auth(), userController.update);
-router.post("profile/password", auth(), userController.passwordUpdate);
+router.get("/user", auth(), userController.index);
+router.post("/profile/update", auth(), userController.update);
+router.post("/profile/password", auth(), userController.passwordUpdate);
 
-router.get("bets", auth(), betController.index);
-router.post("bets/stake", auth(), betController.store);
+router.get("/bets", auth(), betController.index);
+router.post("/bets/stake", auth(), betController.store);
 
-router.get("my-bets", auth(), userBetController);
+router.get("/my-bets", auth(), userBetController);
 
-router.get("payment-methods", auth(), paymentMethodController);
+router.get("/payment-methods", auth(), paymentMethodController);
 
-router.get("transactions", auth(), transactionController);
-router.post("deposit", auth(), depositController);
-router.post("withdraw", auth(), withdrawalController);
+router.get("/transactions", auth(), transactionController);
+router.post("/deposit", auth(), depositController);
+router.post("/withdraw", auth(), withdrawalController);
 
-router.post("support", auth(), supportController);
+router.post("/support", auth(), supportController);
 
 // Not Auth routes in Api's routes
-router.get("faqs", faqController);
-router.get("pages/:slug", pageController);
+router.get("/faqs", faqController);
+router.get("/pages/:slug", pageController);
 
 module.exports = router;
