@@ -36,9 +36,11 @@ const errorHandler = (err, req, res, next) => {
     ...(config.env === "development" && { stack: err.stack }),
   };
 
-  if (config.env === "development") {
+  // if (config.env === "development") {
+  if (statusCode === httpStatus.INTERNAL_SERVER_ERROR) {
     logger.error(err);
   }
+  // }
 
   res.status(statusCode).json(response);
 };
