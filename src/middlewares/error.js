@@ -3,10 +3,11 @@ const httpStatus = require("http-status");
 const config = require("../config/config");
 const logger = require("../config/logger");
 const ApiError = require("../utils/ApiError");
+const ValidationError = require("../utils/ValidationError");
 
 const errorConverter = (err, req, res, next) => {
   let error = err;
-  if (!(error instanceof ApiError)) {
+  if (!(error instanceof ApiError) && !(error instanceof ValidationError)) {
     const statusCode =
       error.statusCode || error instanceof mongoose.Error
         ? httpStatus.BAD_REQUEST
@@ -29,6 +30,9 @@ const errorHandler = (err, req, res, next) => {
   const response = {
     code: statusCode,
     message,
+    ...(statusCode === httpStatus.UNPROCESSABLE_ENTITY && {
+      errors: err.errors,
+    }),
     ...(config.env === "development" && { stack: err.stack }),
   };
 
@@ -36,7 +40,7 @@ const errorHandler = (err, req, res, next) => {
     logger.error(err);
   }
 
-  res.status(statusCode).send(response);
+  res.status(statusCode).json(response);
 };
 
 module.exports = {
