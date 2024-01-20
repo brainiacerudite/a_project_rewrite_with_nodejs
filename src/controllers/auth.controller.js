@@ -1,58 +1,59 @@
 const httpStatus = require("http-status");
 const catchAync = require("../utils/catchAsync");
+const { authService, tokenService, userService } = require("../services");
 
 const login = catchAync(async (req, res) => {
-  // validation
+  const {
+    body: { email, password },
+  } = req;
 
-  // autheticate
-
-  res.status(httpStatus.NO_CONTENT);
+  const user = await authService.attemptLogin(email, password);
+  const tokens = await tokenService.generateAuthTokens(user);
+  res.status(httpStatus.OK).send({ user, tokens });
 });
 
 const register = catchAync(async (req, res) => {
-  // validation
+  const user = await userService.create(req.body);
+  const tokens = await tokenService.generateAuthTokens(user);
 
-  // save user
-
-  // authenticate
-
-  res.status(httpStatus.NO_CONTENT);
+  res.status(httpStatus.CREATED).send({ user, tokens });
 });
 
 const logout = catchAync(async (req, res) => {
-  res.status(httpStatus.OK);
+  await authService.logout(req.body.refreshToken);
+  res.status(httpStatus.NO_CONTENT).send();
 });
 
 const refreshTokens = catchAync(async (req, res) => {
-  res.send("token");
+  const tokens = await authService.refreshAuth(req.body.refreshToken);
+  res.send({ ...tokens });
 });
 
 const forgotPassword = catchAync(async (req, res) => {
-  // validation
-
-  // logic
-
-  res.status(httpStatus.NO_CONTENT);
+  const token = await tokenService.generateResetPasswordToken(req.body.email);
+  //TODO: send email to user to reset the password
+  res.status(httpStatus.NO_CONTENT).send();
 });
 
 const resetPassword = catchAync(async (req, res) => {
-  // validation
+  await authService.resetPassword(
+    req.query.token,
+    req.body.password,
+    req.body.passwordConfirmation
+  );
 
-  // logic
-
-  res.status(httpStatus.NO_CONTENT);
+  res.status(httpStatus.NO_CONTENT).send();
 });
 
 const sendVerificationEmail = catchAync(async (req, res) => {
+  const token = await tokenService.generateVerifyEmailToken(req.user);
+  //TODO: send email to user
   res.status(httpStatus.NO_CONTENT).send();
 });
 
 const verifyEmail = catchAync(async (req, res) => {
-  // validation
-
-  // logic
-
-  res.status(httpStatus.NO_CONTENT);
+  await authService.verifyEmail(req.query.token);
+  res.status(httpStatus.NO_CONTENT).send();
 });
 
 module.exports = {
