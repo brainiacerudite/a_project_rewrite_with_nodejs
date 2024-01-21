@@ -22,7 +22,7 @@ const tokenSchema = Schema(
         tokenTypes.RESET_PASSWORD,
         tokenTypes.VERIFY_EMAIL,
       ],
-      required,
+      required: true,
     },
     expires: {
       type: Date,
@@ -37,7 +37,7 @@ const tokenSchema = Schema(
 );
 
 // add plugin
-tokenSchema.plugins(toJSON);
+tokenSchema.plugin(toJSON);
 
 /**
  * @typedef Token

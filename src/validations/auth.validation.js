@@ -10,10 +10,11 @@ const login = {
 
 const register = {
   body: Joi.object().keys({
+    name: Joi.string().required(),
     username: Joi.string().alphanum().min(3).max(30).required(),
     email: Joi.string().email().required(),
     password: Joi.string().required().custom(customPassword),
-    // passwordConfirmation: Joi.ref(),
+    passwordConfirmation: Joi.ref("password"),
   }),
 };
 
